@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assassin's Portfolio - Brotherhood</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cinzel', 'Georgia', serif;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: #a8a8a8;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 100px 20px;
+            text-align: center;
+            border-bottom: 2px solid #8B0000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '🦅';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 60px;
+            opacity: 0.1;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            color: #c0c0c0;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.9);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #666;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .creed-symbol {
+            font-size: 4em;
+            color: #3a3a3a;
+            margin: 20px 0;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        }
+
+        nav {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #2a2a2a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav a {
+            color: #888;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            display: inline-block;
+            border: 1px solid #333;
+            background: rgba(20, 20, 20, 0.8);
+            transition: all 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            background: #1a1a1a;
+            color: #c0c0c0;
+            border-color: #8B0000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            color: #7a7a7a;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        section h2::before {
+            content: '⚔️ ';
+            margin-right: 10px;
+            opacity: 0.5;
+            filter: drop-shadow(0 0 3px #8B0000);
+        }
+
+        .about-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .profile-frame {
+            width: 300px;
+            height: 300px;
+            border: 3px solid #333;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(139, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        .profile-frame img {
+    /* 1. Makes the image take up 100% of the parent container's width */
+            width: 100%; 
+    
+    /* 2. Makes the image take up 100% of the parent container's height */
+            height: 100%; 
+    
+    /* 3. This property is crucial: it tells the image how to fit */
+            object-fit: cover; 
+    
+    /* Optional: If you want the image to be a perfect circle */
+    /* border-radius: 50%; */ 
+    }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(15, 15, 15, 0.8);
+            padding: 30px;
+            border-left: 3px solid #8B0000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        }
+
+        .about-text p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #999;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: rgba(15, 15, 15, 0.9);
+            padding: 30px;
+            border: 2px solid #2a2a2a;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #444;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+            background: rgba(20, 20, 20, 0.9);
+        }
+
+        .skill-card h3 {
+            color: #aaa;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .skill-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        .skill-card p {
+            color: #777;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            border: 2px solid #2a2a2a;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            border-color: #8B0000;
+            box-shadow: 0 15px 40px rgba(139, 0, 0, 0.3);
+        }
+
+        .project-header {
+            background: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .project-header h3 {
+            color: #bbb;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .project-body {
+            padding: 25px;
+        }
+
+        .project-body p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: #888;
+        }
+
+        .project-body strong {
+            color: #aaa;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #333;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            background: rgba(15, 15, 15, 0.8);
+            padding: 25px;
+            border-left: 3px solid #444;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+        }
+
+        .timeline-item::before {
+            content: '●';
+            position: absolute;
+            left: -44px;
+            top: 25px;
+            font-size: 30px;
+            color: #555;
+        }
+
+        .timeline-item h3 {
+            color: #aaa;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-date {
+            color: #666;
+            font-style: italic;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            color: #888;
+        }
+
+        .contact-container {
+            background: rgba(15, 15, 15, 0.9);
+            padding: 50px;
+            border: 2px solid #2a2a2a;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            padding: 20px 30px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: #1a1a1a;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+            border-color: #555;
+        }
+
+        .contact-item a {
+            color: #999;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        footer {
+            background: rgba(10, 10, 10, 0.98);
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #2a2a2a;
+            color: #666;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-style: italic;
+        }
+
+        .section-decoration {
+            text-align: center;
+            margin: 40px 0;
+            color: #444;
+            font-size: 2em;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="creed-symbol"></div>
+        <h1>SHWETANK GUPTA</h1>
+        <p class="subtitle">(Things in here are based on Assassins Creed)</Things></p>
+        <p class="subtitle">"We work in the dark to serve the light"</p>
+
+    </header>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="about">
+        <h2>About the Assassin</h2>
+        <div class="about-content">
+            <div class="profile-frame">
+                <img src="Assets/edit.jpg">
+            </div>
+            <div class="about-text">
+                <p>I move through the shadows of the digital realm, a silent guardian crafting solutions unseen until they strike with perfect precision.</p>
+                <p>Like Ezio in his black Brotherhood robes, I operate from the darkness—observing, learning, executing. Every line of code is a hidden blade, every project a completed contract.</p>
+                <p>Nothing is true, everything is permitted. But quality is absolute.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-decoration">⚔️ 🦅 ⚔️</div>
+
+    <section id="skills">
+        <h2>Arsenal of Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>Hidden Blade</h3>
+                <p>HTML5, CSS3, JavaScript - Strike from the shadows with precision</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🎨</div>
+                <h3>Eagle Vision</h3>
+                <p>UI/UX Design - See what others cannot, design what others won't</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">⚙️</div>
+                <h3>Assassin Tools</h3>
+                <p>React, Node.js, Git - Modern weapons for ancient purposes</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🗡️</div>
+                <h3>Silent Execution</h3>
+                <p>Problem Solving, Debugging, Optimization - Leave no trace</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-decoration">🦅</div>
+
+    <section id="projects">
+        <h2>Completed Contracts</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>🏛️ Project Colosseum</h3>
+                </div>
+                <div class="project-body">
+                    <p><strong>Mission:</strong> Built a responsive management system from the shadows</p>
+                    <p><strong>Weapons Used:</strong> HTML, CSS, JavaScript</p>
+                    <p><strong>Result:</strong> Delivered silently, adopted widely, noticed by none until operational</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>🗡️ Brotherhood Network</h3>
+                </div>
+                <div class="project-body">
+                    <p><strong>Mission:</strong> Created secure communication channels for the order</p>
+                    <p><strong>Weapons Used:</strong> React, Node.js</p>
+                    <p><strong>Result:</strong> Zero breaches, maximum stealth, perfect synchronization</p>
+                </div>
+            </div>
+    </section>
+
+    <div class="section-decoration">⚔️ 🦅 ⚔️</div>
+
+    <section id="experience">
+        <h2>Path Through Darkness</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Master Assassin - Silent Execution Division</h3>
+                <p class="timeline-date">1500 - Present</p>
+                <p>Operating from the shadows, leading covert operations in digital transformation. Training initiates in the art of invisible excellence.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Senior Assassin - Brotherhood Operations</h3>
+                <p class="timeline-date">1498 - 1500</p>
+                <p>Executed high-priority contracts with zero visibility. Specialized in silent deployment and ghost optimization techniques.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Initiate - The Hidden Order</h3>
+                <p class="timeline-date">1495 - 1498</p>
+                <p>Learned the ancient ways under the mentorship of master assassins. Forged in darkness, refined by discipline.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-decoration">🦅</div>
+
+    <section id="contact">
+        <h2>Send Your Signal</h2>
+        <div class="contact-container">
+            <p style="font-size: 1.2em; margin-bottom: 30px; color: #888;">The Brotherhood watches. The Brotherhood listens.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <a href="mailto:shwetankg07@gmail.com">📧 Email</a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://github.com/shwetankg07" target="_blank">💻 GitHub</a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://www.linkedin.com/in/shwetank-gupta-256127356?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BzQWAy%2Fx4TSKcBdy0zwgYCQ%3D%3D" target="_blank">💼 LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>"We work in the dark to serve the light"</p>
+        <p>© 2025 Shwetank Gupta | Brotherhood of Shadows</p>
+        <p style="margin-top: 15px;">🦅 Requiescat in Pace 🦅</p>
+    </footer>
+</body>
+</html>
